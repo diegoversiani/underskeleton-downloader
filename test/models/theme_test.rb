@@ -4,24 +4,24 @@ class ThemeTest < ActiveSupport::TestCase
   
 
   def setup
-    @theme = Theme.new
-    @theme.name = 'New Theme'
-    @theme.slug = 'newslug'
-    @theme.author = 'John Doe'
-    @theme.author_uri = 'http://johndoe.com'
-    @theme.description = 'Description of the new theme.'
+    @theme = Theme.new(
+      name: 'New Theme',
+      slug: 'newslug',
+      author: 'John Doe',
+      author_uri: 'http://johndoe.com',
+      description: 'Description of the new theme.')
 
     @download_dir = Rails.root.join('tmp/generated-themes').to_s
 
     @theme.get_file
   end
 
-  test "theme folder and zip file created" do
+  test "should create theme folder and compressed file" do
     assert Dir.exists?(@download_dir + "/#{@theme.slug}/#{@theme.slug}")
     assert File.exists?(@download_dir + "/#{@theme.slug}.zip")
   end
 
-  test "theme identification changed" do
+  test "should change theme identification in style.css file" do
     filename = @download_dir + "/#{@theme.slug}/#{@theme.slug}/style.css"
 
     assert File.exists?(filename)
@@ -35,4 +35,14 @@ class ThemeTest < ActiveSupport::TestCase
     assert file_contents.include?("Description: #{@theme.description}")
     assert file_contents.include?("Text Domain: #{@theme.slug}")
   end
+
+  test "should delete folder and compressed file" do
+    assert @theme.respond_to? :destroy
+
+    @theme.destroy
+
+    assert_not Dir.exists?(@download_dir + "/#{@theme.slug}/#{@theme.slug}")
+    assert_not File.exists?(@download_dir + "/#{@theme.slug}.zip")
+  end
+
 end
