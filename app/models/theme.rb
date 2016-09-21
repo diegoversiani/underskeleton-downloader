@@ -9,14 +9,14 @@ class Theme
 
   def initialize(params={})
     @name = params[:name]
-    @slug = params[:slug]
+    @slug = params[:slug].nil? ? Theme.convert_to_slug(@name) : Theme.convert_to_slug(params[:slug])
     @author = params[:author]
     @author_uri = params[:author_uri]
     @description = params[:description]
   end
 
   def get_file
-    generate_file
+    generate_file if @name.present? and @slug.present?
   end
 
   def destroy
@@ -38,7 +38,7 @@ class Theme
       set_paths
 
       # todo: sanitize theme id
-      # @slug ||= @name.downcase
+      @slug = @slug || @name
 
       # create generate-themes directory
       Dir.mkdir Rails.root.join('tmp/generated-themes') unless Dir.exists?(Rails.root.join('tmp/generated-themes'))
@@ -52,6 +52,8 @@ class Theme
 
       @archive
     end
+
+
 
     def set_paths
       @theme_root_dir = Rails.root.join('tmp/generated-themes', "#{@slug}").to_s
@@ -115,6 +117,12 @@ class Theme
           zipfile.add(file.sub(@theme_root_dir+'/',''),file)
         end
       end
+    end
+
+
+
+    def self.convert_to_slug(str)
+      str.to_s.gsub(/[^A-Za-z0-9-]+/, '-').downcase
     end
 
 end
