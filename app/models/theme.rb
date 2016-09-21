@@ -17,11 +17,14 @@ class Theme
 
     def generate_file
       puts 'Generating theme file...'
-      @theme_root_dir = Rails.public_path.to_s + "/download/#{@slug}"
-      @theme_dir = Rails.public_path.to_s + "/download/#{@slug}/#{@slug}"
-      @archive = Rails.public_path.to_s + "/download/#{@slug}.zip"
+      @theme_root_dir = Rails.root.join('tmp/generated-themes', "#{@slug}").to_s
+      @theme_dir = Rails.root.join('tmp/generated-themes', "#{@slug}/#{@slug}").to_s
+      @archive = Rails.root.join('tmp/generated-themes', "#{@slug}.zip").to_s
       # todo: sanitize theme id
       # @slug ||= @name.downcase
+
+      # create generate-themes directory
+      Dir.mkdir Rails.root.join('tmp/generated-themes') unless Dir.exists?(Rails.root.join('tmp/generated-themes'))
 
       # Delete and create directory
       if Dir.exists?(@theme_root_dir)

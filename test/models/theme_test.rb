@@ -11,7 +11,7 @@ class ThemeTest < ActiveSupport::TestCase
     @theme.author_uri = 'http://johndoe.com'
     @theme.description = 'Description of the new theme.'
 
-    @download_dir = Rails.public_path.to_s + "/download"
+    @download_dir = Rails.root.join('tmp/generated-themes').to_s
 
     @theme.get_file
   end
