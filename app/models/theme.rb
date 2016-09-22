@@ -77,8 +77,10 @@ class Theme
       files = Dir.glob(@theme_dir + '/**/*.*')
 
       files.each do |f|
+        next if File.basename(f) == 'README.md'
+
         text = File.read(f)
-        if File.basename(f, '.css') == 'style'
+        if File.basename(f) == 'style.css'
           text = text.gsub(/^Author\: (.+)\n/, "Author: #{@author}\n")
           text = text.gsub(/^Author URI\: (.+)\n/, "Author URI: #{@author_uri}\n")
           text = text.gsub(/^Description\: (.+)\n/, "Description: #{@description}\n")
