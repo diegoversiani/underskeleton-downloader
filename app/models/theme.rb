@@ -67,8 +67,15 @@ class Theme
       Dir.mkdir @theme_root_dir
       Dir.mkdir @theme_dir
 
-      # clone underskeleton repo and remove git references
-      Git.export REPO_URL, @theme_dir
+      # clone underskeleton repo and checkout last tag
+      g = Git.clone REPO_URL, @theme_dir
+      g.checkout g.tags.last
+
+      # clean git references
+      if Dir.exists?("#{@theme_dir}/.git")
+        FileUtils.rm_rf("#{@theme_dir}/.git/.", secure: true)
+        Dir.rmdir "#{@theme_dir}/.git"
+      end
     end
 
 
