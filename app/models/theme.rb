@@ -9,7 +9,7 @@ class Theme
 
   def initialize(params={})
     @name = params[:name]
-    @slug = params[:slug].nil? ? Theme.convert_to_slug(@name) : Theme.convert_to_slug(params[:slug])
+    @slug = params[:slug].present? ?  Theme.convert_to_slug(params[:slug]) : Theme.convert_to_slug(@name)
     @author = params[:author]
     @author_uri = params[:author_uri]
     @description = params[:description]
