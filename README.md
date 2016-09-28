@@ -28,7 +28,7 @@ Example:
 
 ```
 # Will create a theme name New Theme Name and slug 
-https://underskeleton-downloader.herokuapp.com/themes/create?name=New%20Theme%20Name&slug=new-theme-name
+https://underskeleton-downloader.herokuapp.com/themes/create?name=New%20Theme%20Name&slug=new_theme_name
 ```
 
 If `slug` is not provided the API will convert the name into slug
@@ -36,6 +36,6 @@ If `slug` is not provided the API will convert the name into slug
 Example:
 
 ```
-# Will create a theme name 'New Theme Name' and slug 'new-theme-name'
+# Will create a theme name 'New Theme Name' and slug 'new_theme_name'
 https://underskeleton-downloader.herokuapp.com/themes/create?name=New%20Theme%20Name
 ```

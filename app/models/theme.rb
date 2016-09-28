@@ -131,7 +131,7 @@ class Theme
 
 
     def self.convert_to_slug(str)
-      str.to_s.gsub(/[^A-Za-z0-9-]+/, '-').downcase
+      str.to_s.gsub(/[^A-Za-z0-9_]+/, '_').downcase
     end
 
 end

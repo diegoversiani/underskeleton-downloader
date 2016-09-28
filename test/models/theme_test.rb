@@ -25,7 +25,7 @@ class ThemeTest < ActiveSupport::TestCase
     @theme = Theme.new(name: 'Theme Name')
 
     # should convert name to slug
-    assert_equal "theme-name", @theme.slug
+    assert_equal "theme_name", @theme.slug
 
     @theme.get_file
 
