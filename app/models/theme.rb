@@ -94,8 +94,9 @@ class Theme
         end
 
         # text theme name and slug
-        text = text.gsub('Underskeleton', @name)
+        text = text.gsub('Underskeleton_', Theme.convert_to_slug_titleize(@name) + '_')
         text = text.gsub('underskeleton', @slug)
+        text = text.gsub('Underskeleton', @name)
 
         # recover underskeleton website/github url
         text = text.gsub("get#{@slug}", "getunderskeleton")
@@ -132,6 +133,12 @@ class Theme
 
     def self.convert_to_slug(str)
       str.to_s.gsub(/[^A-Za-z0-9_]+/, '_').downcase
+    end
+
+
+
+    def self.convert_to_slug_titleize(str)
+      str.to_s.gsub(/[^A-Za-z0-9_]+/, ' ').titleize.gsub(' ', '_')
     end
 
 end
