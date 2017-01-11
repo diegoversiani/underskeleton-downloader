@@ -4,7 +4,7 @@ Download API for [Underskeleton Starter Theme](http://github.com/diegoversiani/u
 
 You may want to visit [getunderskeleton.com/download](http://getunderskeleton.com/download) to create your copy of Underskeleton.
 
-The API provides an easy way to create copies of Underskeleton an change its identification as Underskeleton is intended to be a starter theme and not a parent theme for WordPress.
+The API provides an easy way to create copies of Underskeleton and change its identification as Underskeleton is intended to be a starter theme and not a parent theme for WordPress.
 
 It clones the **last released tag** of the Underskeleton Project and create the new theme based on it.
 
