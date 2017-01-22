@@ -8,6 +8,8 @@ The API provides an easy way to create copies of Underskeleton and change its id
 
 It clones the **last released tag** of the Underskeleton Project and create the new theme based on it.
 
+**> > Now you can specify a branch name to create your copy from. See below.**
+
 ## Usage
 
 The API is hosted at https://underskeleton-downloader.herokuapp.com
@@ -23,19 +25,35 @@ Simply send a `get` request to `https://underskeleton-downloader.herokuapp.com/t
 - author (optional)
 - author_uri (optional)
 - description (optional)
+- branch (optional)
 
-Example:
+###### Default usage
+
+Copy from last stable release, providing name and slug.
 
 ```
-# Will create a theme name New Theme Name and slug 
-https://underskeleton-downloader.herokuapp.com/themes/create?name=New%20Theme%20Name&slug=new_theme_name
+# Will create a theme name 'New Theme Name' and slug 'theme_slug'
+https://underskeleton-downloader.herokuapp.com/themes/create?name=New%20Theme%20Name&slug=theme_slug
 ```
+
+
+###### Name converted into slug
 
 If `slug` is not provided the API will convert the name into slug
-
-Example:
 
 ```
 # Will create a theme name 'New Theme Name' and slug 'new_theme_name'
 https://underskeleton-downloader.herokuapp.com/themes/create?name=New%20Theme%20Name
+```
+
+
+###### Copy from specific branch
+
+Provide a value to `branch` parameter to copy from it.
+
+If you want to copy from `master` branch, for example:
+
+```
+# Will create a theme name 'New Theme Name' and slug 'theme_slug' from MASTER branch
+https://underskeleton-downloader.herokuapp.com/themes/create?name=New%20Theme%20Name&slug=theme_slug&branch=master
 ```
