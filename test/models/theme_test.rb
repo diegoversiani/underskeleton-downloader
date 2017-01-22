@@ -14,6 +14,8 @@ class ThemeTest < ActiveSupport::TestCase
     @download_dir = Rails.root.join('tmp/generated-themes').to_s
   end
 
+  # TODO: CREATE TESTS FOR BRANCH AND NON EXISTENT BRANCHES
+
   test "should create theme folder and compressed file" do
     @theme.get_file
 

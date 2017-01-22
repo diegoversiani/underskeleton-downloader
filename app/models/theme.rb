@@ -3,7 +3,7 @@ require 'zip'
 
 class Theme
 
-  attr_accessor :name, :slug, :author, :author_uri, :description
+  attr_accessor :name, :slug, :author, :author_uri, :description, :branch
 
   REPO_URL = 'https://github.com/diegoversiani/underskeleton.git'
 
@@ -13,6 +13,7 @@ class Theme
     @author = params[:author]
     @author_uri = params[:author_uri]
     @description = params[:description]
+    @branch = params[:branch]
   end
 
   def get_file
@@ -67,9 +68,16 @@ class Theme
       Dir.mkdir @theme_root_dir
       Dir.mkdir @theme_dir
 
-      # clone underskeleton repo and checkout last tag
+      # clone underskeleton repo
       g = Git.clone REPO_URL, @theme_dir
-      g.checkout g.tags.last
+
+      # checkout branch or last release
+      if !@branch.nil? && !@branch.empty?
+        raise 'Branch do not exist' if g.branches['origin/' + @branch].nil?
+        g.checkout(g.branches['origin/' + @branch])
+      else
+        g.checkout g.tags.last
+      end
 
       # clean git references
       if Dir.exists?("#{@theme_dir}/.git")

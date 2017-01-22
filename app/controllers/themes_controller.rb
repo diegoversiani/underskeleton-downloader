@@ -15,6 +15,6 @@ class ThemesController < ApplicationController
   private
 
     def theme_params
-      params.permit(:name, :slug, :author, :author_uri, :description)
+      params.permit(:name, :slug, :author, :author_uri, :description, :branch)
     end
 end
